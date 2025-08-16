@@ -26,9 +26,7 @@ export const getScalar = ({
   name?: string;
   context: ContextSpecs;
 }): ScalarValue => {
-  // NOTE: Angular client does not support nullable types
-  const isAngularClient = context.output.client === OutputClient.ANGULAR;
-  const nullable = item.nullable && !isAngularClient ? ' | null' : '';
+  const nullable = item.nullable ? ' | null' : '';
 
   const enumItems = item.enum?.filter((enumItem) => enumItem !== null);
 
@@ -40,7 +38,8 @@ export const getScalar = ({
     case 'number':
     case 'integer': {
       let value =
-        item.format === 'int64' && context.output.override.useBigInt
+        context.output.override.useBigInt &&
+        (item.format === 'int64' || item.format === 'uint64')
           ? 'bigint'
           : 'number';
       let isEnum = false;

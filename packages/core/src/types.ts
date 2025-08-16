@@ -54,7 +54,6 @@ export type NormalizedOutputOptions = {
   clean: boolean | string[];
   docs: boolean | OutputDocsOptions;
   prettier: boolean;
-  tslint: boolean;
   biome: boolean;
   tsconfig?: Tsconfig;
   packageJson?: PackageJson;
@@ -229,7 +228,6 @@ export type OutputOptions = {
   clean?: boolean | string[];
   docs?: boolean | OutputDocsOptions;
   prettier?: boolean;
-  tslint?: boolean;
   biome?: boolean;
   tsconfig?: string | Tsconfig;
   packageJson?: string;
@@ -501,6 +499,10 @@ export type ZodDateTimeOptions = {
   precision?: number;
 };
 
+export type ZodTimeOptions = {
+  precision?: -1 | 0 | 1 | 2 | 3;
+};
+
 export type ZodOptions = {
   strict?: {
     param?: boolean;
@@ -531,6 +533,7 @@ export type ZodOptions = {
     response?: Mutator;
   };
   dateTimeOptions?: ZodDateTimeOptions;
+  timeOptions?: ZodTimeOptions;
   generateEachHttpStatus?: boolean;
 };
 
@@ -567,6 +570,7 @@ export type NormalizedZodOptions = {
   };
   generateEachHttpStatus: boolean;
   dateTimeOptions: ZodDateTimeOptions;
+  timeOptions: ZodTimeOptions;
 };
 
 export type HonoOptions = {
@@ -622,6 +626,7 @@ export type AngularOptions = {
 
 export type SwrOptions = {
   useInfinite?: boolean;
+  useSWRMutationForGet?: boolean;
   swrOptions?: any;
   swrMutationOptions?: any;
   swrInfiniteOptions?: any;
@@ -720,7 +725,6 @@ export interface GlobalOptions {
   watch?: boolean | string | (string | boolean)[];
   clean?: boolean | string[];
   prettier?: boolean;
-  tslint?: boolean;
   biome?: boolean;
   mock?: boolean | GlobalMockOptions;
   client?: OutputClient;
